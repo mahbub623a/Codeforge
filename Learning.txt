@@ -1,0 +1,54 @@
+---- Basic ----
+ceil(a/b) = (a+b-1)/b 
+floor(a/b) = a/b
+mid(l,r) l + (r - l) / 2 (flooring mid)
+mid(l, r) l + (r - l + 1) / 2; (ceiling mid)
+
+Given size 7 starting point 2, end point?
+a(n) = start + (size - 1) * difference
+
+1^2 + 2^2 + 3^2 + 4^2 ... n^2 = (n(n+1)(2n+1))/6
+1 + 2 + 3 + 4 + 5 ... + n = n(n+1)/2
+1 + 3 + 5 + 7 ... + n = n^2
+
+
+upper_bound => value matched or not matched always gives upper values position as iterator
+lower_bound => if value matched give exact position otherwise upper values position
+
+
+Using find("abc") function in string we can find the first occurred string or character from beginning.
+Using rfind("abc") function in string we can find the first occurred string or character from end.
+Using s.substr(i, j) function we can find a sub-string of a string from i to j - 1;
+
+
+we can count each individual number's number of divisor using pre-computation - here we are increasing 1 if the number is multiple of that number
+Logic -> if b is multiple of a than b is must divisible by a.
+    for (int i = 1; i <= s; i++)
+        for (int j = i; j <= s; j+=i)
+            v[j]++;
+
+
+If a numbers prime factor are 2^a x 3^b x 5^c.... then the total divisor of that number is (a+1)x(b+1)x(c+1)....
+
+If you have given how many divisor of a number have. we can find the how many prime number are in the divisor by prime factorization of that divisor number.
+
+If a number is divisible by 3 then sum of it's digit must be divisible by 3
+
+A number is divisible by 8 or not depends on last three digit of that number. If last three digit is divisible by 8 then whole number is divisible by 8 
+
+
+
+---- Documentation ----
+Find Frequency                       -> count(vec.begin(), vec.end(), value);
+Find max element                     -> *max_element(vec.begin(),vec.end());
+Find max element's index             -> max_element(vec.begin(),vec.end()) - vec.begin();
+String uppercae                      -> transform(str.begin(),str.end(), str.begin(), ::toupper);
+String lowercase                     -> transform(str.begin(),str.end(), str.begin(), ::tolower);
+Find substring's index forword       -> find("abc")
+Find substring's index backword      -> rfind("abc")
+Insert into string anywhere          -> str.insert(str.begin(), 'a');
+
+
+---- Functionality ----
+iota(v.begin(), v.end(), 0); -> fill a vector from 1 to n
+cout << p[i] << " \n"[i == n - 1]; -> print new line in last iteration else space
