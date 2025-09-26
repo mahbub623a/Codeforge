@@ -4,7 +4,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#ifdef LOCAL   // Enable debug only if compiled with -DLOCAL
+#ifdef LOCAL
 #define print(...) print_out(#__VA_ARGS__, __VA_ARGS__)
 #else
 #define print(...) 42
@@ -14,10 +14,41 @@ using namespace std;
 template <typename T>
 string to_string_debug(const T& value);
 
+// ---------- Primitive / arithmetic ----------
+template <>
+inline string to_string_debug<const char*>(const char* const & s) {
+    return "\"" + string(s) + "\"";
+}
+
+template <>
+inline string to_string_debug<string>(const string& s) {
+    return "\"" + s + "\"";
+}
+
+template <>
+inline string to_string_debug<char>(const char& c) {
+    return string(1, c);
+}
+
 // ---------- Pair ----------
 template <typename A, typename B>
 string to_string_debug(const pair<A, B>& p) {
     return "(" + to_string_debug(p.first) + ", " + to_string_debug(p.second) + ")";
+}
+
+// ---------- Tuple ----------
+template <typename Tuple, size_t... I>
+string tuple_to_string(const Tuple& t, index_sequence<I...>) {
+    stringstream ss;
+    ss << "(";
+    ((ss << (I == 0 ? "" : ", ") << to_string_debug(get<I>(t))), ...);
+    ss << ")";
+    return ss.str();
+}
+
+template <typename... Args>
+string to_string_debug(const tuple<Args...>& t) {
+    return tuple_to_string(t, index_sequence_for<Args...>{});
 }
 
 // ---------- Map ----------
@@ -50,17 +81,25 @@ string range_to_string(const T& container) {
     return ss.str();
 }
 
-// ---------- Generic types ----------
+// ---------- Raw pointers ----------
+template <typename T>
+string to_string_debug(T* ptr) {
+    return ptr ? "<ptr>" : "nullptr";
+}
+
+// ---------- Generic / Iterable ----------
 template <typename T>
 string to_string_debug(const T& value) {
-    if constexpr (is_same<T, string>::value) {
+    if constexpr (is_arithmetic<T>::value) {
+        return to_string(value);
+    } else if constexpr (is_same<T,string>::value) {
         return "\"" + value + "\"";
-    } else if constexpr (is_arithmetic<T>::value) {
-        return std::to_string(value);
-    } else if constexpr (is_same<T, char>::value) {
-        return string(1, value);
+    } else if constexpr (requires { begin(value); end(value); }) {
+        return range_to_string(value); // iterable containers
+    } else if constexpr (is_pointer<T>::value) {
+        return value ? "<ptr>" : "nullptr";
     } else {
-        return range_to_string(value); // assume iterable
+        return "<non-printable>";
     }
 }
 
@@ -79,6 +118,12 @@ void print_out(const char* names, T value, Args... args) {
     } else {
         cerr << names << " = " << to_string_debug(value) << "\n";
     }
+}
+
+// ---------- _print for C-style arrays (clean output) ----------
+template <typename T, size_t N>
+void _print(T (&arr)[N], const char* name = "arr") {
+    print_out(name, vector<T>(arr, arr + N));
 }
 
 #endif // DEBUG_H
