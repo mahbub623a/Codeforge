@@ -103,6 +103,42 @@ string to_string_debug(const T& value) {
     }
 }
 
+// ---------- Stack (top -> bottom) ----------
+template <typename T, typename Container>
+string to_string_debug(const stack<T, Container>& s) {
+    stack<T, Container> copy = s;
+    vector<T> elems;
+    while (!copy.empty()) {
+        elems.push_back(copy.top());
+        copy.pop();
+    }
+    return range_to_string(elems);
+}
+
+// ---------- Queue (front -> back) ----------
+template <typename T, typename Container>
+string to_string_debug(const queue<T, Container>& q) {
+    queue<T, Container> copy = q;
+    vector<T> elems;
+    while (!copy.empty()) {
+        elems.push_back(copy.front());
+        copy.pop();
+    }
+    return range_to_string(elems);
+}
+
+// ---------- Priority Queue (top -> bottom) ----------
+template <typename T, typename Container, typename Compare>
+string to_string_debug(const priority_queue<T, Container, Compare>& pq) {
+    priority_queue<T, Container, Compare> copy = pq;
+    vector<T> elems;
+    while (!copy.empty()) {
+        elems.push_back(copy.top());
+        copy.pop();
+    }
+    return range_to_string(elems);
+}
+
 // ---------- Base case ----------
 inline void print_out(const char* names) {
     cerr << "\n";
