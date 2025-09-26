@@ -120,10 +120,4 @@ void print_out(const char* names, T value, Args... args) {
     }
 }
 
-// ---------- _print for C-style arrays (clean output) ----------
-template <typename T, size_t N>
-void _print(T (&arr)[N], const char* name = "arr") {
-    print_out(name, vector<T>(arr, arr + N));
-}
-
 #endif // DEBUG_H

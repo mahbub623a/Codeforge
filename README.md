@@ -30,5 +30,4 @@ This repository serves as a personal toolkit for competitive programming, combin
 | **Map / Unordered Map** | `map<int,string> mp = {{1,"one"}, {2,"two"}}; print(mp);` | `mp = {1 => "one", 2 => "two"}` | Key => Value format |
 | **Nested Containers** | `vector<pair<int,int>> vp = {{1,2},{3,4}}; print(vp);` | `vp = {(1, 2), (3, 4)}` | Works recursively |
 | **Pointers** | `int* ptr = &x; print(ptr);` | `<ptr>` or `nullptr` | Prints `<ptr>` for valid pointers, `nullptr` for null |
-| **C-style Arrays** | `int arr[5] = {1,2,3,4,5}; _print(arr);` | `arr = {1, 2, 3, 4, 5}` | Must use `_print(arr)` |
 | **Lambda / Unknown Type** | `auto f = [](){}; print(f);` | `<non-printable>` | Any type not directly supported prints `<non-printable>` |
