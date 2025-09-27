@@ -5,9 +5,9 @@
 using namespace std;
 
 #ifdef LOCAL
-#define print(...) print_out(#__VA_ARGS__, __VA_ARGS__)
+#define pt(...) print_out(#__VA_ARGS__, __VA_ARGS__)
 #else
-#define print(...) 42
+#define pt(...) 42
 #endif
 
 // Forward declaration
