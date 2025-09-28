@@ -5,9 +5,9 @@
 using namespace std;
 
 #ifdef LOCAL
-#define pt(...) print_out(#__VA_ARGS__, __VA_ARGS__)
+#define see(...) print_out(#__VA_ARGS__, __VA_ARGS__)
 #else
-#define pt(...) 42
+#define see(...) 42
 #endif
 
 // Forward declaration
@@ -85,6 +85,15 @@ string range_to_string(const T& container) {
 template <typename T>
 string to_string_debug(T* ptr) {
     return ptr ? "<ptr>" : "nullptr";
+}
+
+// ---------- C-strings ----------
+inline string to_string_debug(const char* s) {
+    return s ? "\"" + string(s) + "\"" : "nullptr";
+}
+
+inline string to_string_debug(char* s) {
+    return s ? "\"" + string(s) + "\"" : "nullptr";
 }
 
 // ---------- Generic / Iterable ----------
